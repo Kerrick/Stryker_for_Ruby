@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2025 Kerrick Long <me@kerricklong.com>
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+bundle install
+
+if command -v pip >/dev/null 2>&1; then
+  pip install pre-commit
+  pre-commit install
+else
+  echo "pip isn't installed. Set it up, then run bin/setup again. https://pypi.org/project/pip/" >&2
+  exit 1
+fi
+
